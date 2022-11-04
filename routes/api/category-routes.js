@@ -40,6 +40,8 @@ router.post('/', (req, res) => {
   // create a new category
   Category.create(req.body)
     .then((category) => {
+      console.log(category);
+
       res.status(200).json(category);
     })
     .catch((error) => {
@@ -56,7 +58,11 @@ router.put('/:id', (req, res) => {
     }
   })
     .then((category) => {
-      res.status(200).json("Category updated!");
+      if (!category) {
+        res.status(404).json({ message: "No category found with that ID" });
+      } else {
+        res.status(200).json(category);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -68,11 +74,16 @@ router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
   Category.destroy({ where: { id: req.params.id } })
     .then((category) => {
-      res.status(200).json("Category deleted!");
+
+      if (!category) {
+        res.status(404).json({ message: "No category found with that ID!" });
+      }
+
+      res.status(200).json(category);
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 

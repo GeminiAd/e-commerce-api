@@ -53,7 +53,11 @@ router.put('/:id', (req, res) => {
     }
   })
     .then((tag) => {
-      res.status(200).json(tag);
+      if (!tag) {
+        res.status(404).json({ message: "No tag found with that ID!" });
+      } else {
+        res.status(200).json(tag);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -69,11 +73,15 @@ router.delete('/:id', (req, res) => {
     }
   })
     .then((tag) => {
-      res.status(200).json(tag);
+      if (!tag) {
+        res.status(404).json({ message: "No tag found with that ID!" });
+      } else {
+        res.status(200).json(tag);
+      }
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 

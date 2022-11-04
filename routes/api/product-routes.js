@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 
@@ -115,11 +115,15 @@ router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({ where: { id: req.params.id } })
     .then((rows) => {
-      res.status(200).json(rows);
+      if (!rows) {
+        res.status(404).json({ message: "No product found with that ID!" });
+      } else {
+        res.status(200).json(rows);
+      }
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 
