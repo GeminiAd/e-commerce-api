@@ -11,19 +11,81 @@
 
 -------------------------------------------------------
 
-[Video Demo on YouTube](https://youtu.be/AdBSUeU4BeE)
+[Video Demo on YouTube](#TODO)
 
 -------------------------------------------------------
 
-## Description
+## About the e-Commerce API
+
+
+
+## Category API
+
+### Get All Categories
+
+
+
+### Get Category By ID
+
+
+
+### Create a Category
+
+
+
+### Update a Category
+
+
+
+### Delete a Category
+
+
+
+## Product API
+
+### Get All Products
+
+
+
+### Get Product By ID
+
+
+
+### Create a Product
+
+
+
+### Update a Product
+
+
+
+### Delete a Product
+
+
+
+## Tag API
+
+### Get all Tags
+
+
+
+### Get Tag By ID
+
+
+
+### Create a Tag
+
+
+
+### Update a Tag
+
+
+
+### Delete a Tag
 
 
 
 ## Key Features
-
-
-
-## Usage
 
 
 
@@ -40,12 +102,7 @@
 
 - The use of node.js
 - Installing and using node.js packages using npm.
-- Writing to a file using JavaScript.
 - General JavaScript and programming knowledge.
-
-## Credits
-
-Credit goes to [lukas-h](https://github.com/lukas-h) on GitHub for a [list of markdown badges](https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba).       
 
 ## Author
 
