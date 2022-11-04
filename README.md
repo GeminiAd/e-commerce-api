@@ -23,11 +23,17 @@
 
 ### Get All Categories
 
+GET ```/categories```
 
+Example response:                        
+![Sample get all categories response](./images/get-all-categories-sample-response.png)
 
 ### Get Category By ID
 
+GET ```/categories/{id}```
 
+Example response:                           
+![Sample get category by id response](./images/get-category-by-id-sample-response.png)
 
 ### Create a Category
 
@@ -45,11 +51,17 @@
 
 ### Get All Products
 
+GET ```/products```
 
+Example response:                        
+![Sample get all products response](./images/get-all-products-sample-response.png)
 
 ### Get Product By ID
 
+GET ```/products/{id}```
 
+Example response:                        
+![Sample get product by id response](./images/get-product-by-id-sample-response.png)
 
 ### Create a Product
 
@@ -67,11 +79,17 @@
 
 ### Get all Tags
 
+GET ```/tags```
 
+Example response:                        
+![Sample get all tags response](./images/get-all-tags-sample-response.png)
 
 ### Get Tag By ID
 
+GET ```/tags/{id}```
 
+Example response:                        
+![Sample get tag by id response](./images/get-tag-by-id-sample-response.png)
 
 ### Create a Tag
 
