@@ -7,7 +7,7 @@
 <a href="#category-api">Category API</a> •
 <a href="#product-api">Product API</a> •
 <a href="#tag-api">Tag API</a> •
-<a href="#technologies-used">Technologies Used</a> •
+<a href="#technologies-used">Technologies Used</a> 
 <a href="#concepts-demonstrated">Concepts Demonstrated</a> •
 <a href="#author">Author</a>
 
