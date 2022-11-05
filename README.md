@@ -23,9 +23,13 @@
 
 ### Properties
 
-Each category contains the properties:                     
-```id```:&emsp;integer > 0                      
-```category_name```:&emsp;string                 
+Each category contains the properties:                      
+
+```id```:&emsp;integer > 0                    
+The unique ID of each category. Is an integer greater than 0.                
+
+```category_name```:&emsp;string              
+The name of the category.   
 
 ### Get All Categories
 
@@ -185,13 +189,46 @@ The name of the category you wish to update.
 
 #### Sample Response
 
-
+```json
+[
+	1
+]
+```
 
 ### Delete a Category
 
+#### API Route
 
+DELETE&emsp;```/categories{id}```
+
+#### Parameters
+
+```id```&emsp;integer > 0           
+The ID of the category that you wish to update. Must be a positive integer.  
+
+#### Sample Response
+
+```json
+1
+```
 
 ## Product API
+
+Each product contains the properties:                     
+```id```:&emsp;integer > 0                      
+The unique ID of each product. Is an integer greater than 0.               
+
+```product_name```:&emsp;string              
+The name of the product.                     
+
+```price```:&emsp;decimal                         
+The price of the product.                               
+
+```stock```:&emsp;integer > 0                    
+The amount of stock of the product.                  
+
+```category_id```:&emsp;integer > 0                      
+The ID of the category this product belongs to.                 
 
 ### Get All Products
 
@@ -349,17 +386,129 @@ The ID of the product that you wish to get. Must be a positive integer.
 
 ### Create a Product
 
+#### API Route
 
+POST&emsp;```/products```                
+
+#### Parameters            
+
+```product_name```:&emsp;string              
+The name of the product.                     
+
+```price```:&emsp;decimal                         
+The price of the product.                               
+
+```stock```:&emsp;integer > 0                    
+The amount of stock of the product.                  
+
+```category_id```:&emsp;integer > 0                      
+The ID of the category this product belongs to.              
+
+```tagIds```:&emsp;array of integers                     
+An array of IDs for the tags associated with this product.                 
+
+#### Sample Request Body
+
+```json
+{
+	"product_name": "Basketball",
+	"price": 50.00,
+	"stock": 3,
+	"category_id": 7,
+	"tagIds": [4]
+}
+```
+
+#### Response
+
+```json
+[
+	{
+		"id": 13,
+		"product_id": 6,
+		"tag_id": 4
+	}
+]
+```
 
 ### Update a Product
 
+#### API Route
 
+POST&emsp;```/products/{id}``` 
+
+#### Parameters
+
+```id```&emsp;integer > 0                         
+The ID of the product to update.
+
+```product_name```:&emsp;string              
+The name of the product.                     
+
+```price```:&emsp;decimal                         
+The price of the product.                               
+
+```stock```:&emsp;integer > 0                    
+The amount of stock of the product.                  
+
+```category_id```:&emsp;integer > 0                      
+The ID of the category this product belongs to.              
+
+```tagIds```:&emsp;array of integers                     
+An array of IDs for the tags associated with this product.      
+
+#### Sample Request Body
+
+```json
+{
+	"product_name": "Red T-Shirt",
+	"price": 15,
+	"stock": 10,
+	"category_id": 1,
+	"tagIds": [4, 7, 8]
+}
+```
+
+#### Response
+
+```json
+[
+	1,
+	[
+		{
+			"id": 14,
+			"product_id": "1",
+			"tag_id": 4
+		}
+	]
+]
+```
 
 ### Delete a Product
 
+#### API Route
 
+DELETE&emsp;```/products/{id}``` 
+
+#### Parameters
+
+```id```&emsp;integer > 0                         
+The ID of the product to delete.
+
+#### Response
+
+```json
+1
+```
 
 ## Tag API
+
+Each tag contains the properties:                     
+```id```:&emsp;integer > 0                      
+The unique ID of each tag. Is an integer greater than 0.               
+
+```tag_name```:&emsp;string              
+The name of the tag.                     
 
 ### Get all Tags
 
@@ -501,15 +650,101 @@ The ID of the tag that you wish to get. Must be a positive integer.
 
 ### Create a Tag
 
+#### API Route
 
+POST&emsp;```/tags```              
+
+#### Parameters           
+
+```tag_name```:&emsp;string              
+The name of the tag.        
+
+```productIds```:&emsp;array of integers              
+An array containing the IDs of the products associated with this tag, or an empty array if there are none.                   
+
+#### Sample Request Body
+
+```json
+{
+	"tag_name": "sports",
+	"productIds": [2, 3]
+}
+```
+
+#### Response
+
+```json
+[
+	{
+		"id": 13,
+		"product_id": 2,
+		"tag_id": 9
+	},
+	{
+		"id": 14,
+		"product_id": 3,
+		"tag_id": 9
+	}
+]
+```
 
 ### Update a Tag
 
+#### API Route
 
+PUT&emsp;```/tags/{id}```  
+
+#### Parameters
+
+```id```:&emsp;integer > 0                      
+The unique ID of the tag to update.                               
+
+```tag_name```:&emsp;string              
+The name of the tag.    
+
+```productIds```:&emsp;array of integers              
+An array containing the IDs of the products associated with this tag, or an empty array if there are none.        
+
+#### Sample Request Body
+
+```json
+{
+	"tag_name": "sports",
+	"productIds": [2, 4]
+}
+```
+
+#### Response
+
+```json
+[
+	1,
+	[
+		{
+			"id": 15,
+			"product_id": 4,
+			"tag_id": "9"
+		}
+	]
+]
+```
 
 ### Delete a Tag
 
+#### API Route
 
+DELETE&emsp;```/tags/{id}```     
+
+#### Parameters             
+
+```id```:&emsp;integer > 0                      
+The ID of the tag you wish to update                  
+
+#### Response
+
+```json
+1
+```
 
 ## Key Features
 

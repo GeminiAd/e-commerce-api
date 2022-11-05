@@ -40,7 +40,6 @@ router.post('/', (req, res) => {
   // create a new category
   Category.create(req.body)
     .then((category) => {
-      console.log(category);
 
       res.status(200).json(category);
     })
