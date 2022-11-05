@@ -21,13 +21,19 @@
 
 ## Category API
 
+### Properties
+
+Each category contains the properties:                     
+```id```:&emsp;integer > 0                      
+```category_name```:&emsp;string                 
+
 ### Get All Categories
 
 #### API Route
 
 GET&emsp;```/categories```
 
-#### Response
+#### Sample Response
 ```json
 [
 	{
@@ -109,7 +115,7 @@ GET&emsp;```/categories/{id}```
 ```id```&emsp;integer > 0           
 The ID of the category that you wish to get. Must be a positive integer.
 
-#### Response
+#### Sample Response
                         
 ```json
 {
@@ -129,9 +135,55 @@ The ID of the category that you wish to get. Must be a positive integer.
 
 ### Create a Category
 
+#### API Route
 
+POST&emsp;```/categories```                 
+
+#### Parameters
+
+```category_name```&emsp;string               
+The name of the category you wish to update.
+
+#### Sample Request Body
+
+```json
+{
+	"category_name": "Pants"
+}
+```
+
+#### Sample Response
+
+```json
+{
+	"id": 6,
+	"category_name": "Pants"
+}
+```
 
 ### Update a Category
+
+#### API Route
+
+PUT&emsp;```/categories/{id}```
+
+#### Parameters
+
+```id```&emsp;integer > 0           
+The ID of the category that you wish to update. Must be a positive integer.                           
+                     
+```category_name```&emsp;string               
+The name of the category you wish to update.
+
+#### Request Body
+
+```json
+{
+	"category_name": "Accessories"
+}
+```
+
+#### Sample Response
 
 
 
