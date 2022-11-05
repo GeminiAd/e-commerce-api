@@ -108,9 +108,9 @@ The API sends back a list of Categories and their associated Product information
 
 GET&emsp;```/categories/{id}```
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0           
+```id```&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the category that you wish to get. Must be a positive integer.
 
 #### Response
@@ -141,9 +141,9 @@ A GET request to https://fathomless-river-96310.herokuapp.com/api/categories/1 w
 
 POST&emsp;```/categories```                 
 
-#### Parameters
+#### Request Body Parameters
 
-```category_name```&emsp;string               
+```category_name```&emsp;string&emsp;&emsp;(required)                           
 The name of the category you wish to update.
 
 #### Sample Request Body
@@ -156,7 +156,8 @@ The name of the category you wish to update.
 
 #### Response
 
-The API creates the Category, and sends back the created Category in response.                   
+The API creates the Category, and sends back the created Category in response.                        
+
 A POST request to https://fathomless-river-96310.herokuapp.com/api/categories would give the following response:             
 
 ```json
@@ -172,12 +173,14 @@ A POST request to https://fathomless-river-96310.herokuapp.com/api/categories wo
 
 PUT&emsp;```/categories/{id}```
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0           
+```id```&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the category that you wish to update. Must be a positive integer.                           
-                     
-```category_name```&emsp;string               
+
+#### Request Body Parameters
+
+```category_name```&emsp;string&emsp;&emsp;(optional)                           
 The name of the category you wish to update.
 
 #### Sample Request Body
@@ -206,9 +209,9 @@ The following JSON data is returned on a successful PUT request to https://fatho
 
 DELETE&emsp;```/categories{id}```
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0           
+```id```&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the category that you wish to update. Must be a positive integer.  
 
 #### Response
@@ -350,9 +353,9 @@ Sample response:
 
 GET&emsp;```/products/{id}```
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0                         
+```id```&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the product that you wish to get. Must be a positive integer.
 
 ### Response
@@ -410,22 +413,22 @@ A GET request made to https://fathomless-river-96310.herokuapp.com/api/products/
 
 POST&emsp;```/products```                
 
-#### Parameters            
+#### Request Body Parameters            
 
-```product_name```:&emsp;string              
+```product_name```:&emsp;string&emsp;&emsp;(required)                           
 The name of the product.                     
 
-```price```:&emsp;decimal                         
+```price```:&emsp;decimal&emsp;&emsp;(required)                           
 The price of the product.                               
 
-```stock```:&emsp;integer > 0                    
+```stock```:&emsp;integer > 0&emsp;&emsp;(required)                           
 The amount of stock of the product.                  
 
-```category_id```:&emsp;integer > 0                      
+```category_id```:&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the category this product belongs to.              
 
-```tagIds```:&emsp;array of integers                     
-An array of IDs for the tags associated with this product.                 
+```tagIds```:&emsp;array of integers&emsp;&emsp;(required)                           
+An array of IDs for the tags associated with this product, or an empty array if there are none.                 
 
 #### Sample Request Body
 
@@ -460,24 +463,26 @@ Sample Response:
 
 POST&emsp;```/products/{id}``` 
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0                         
+```id```&emsp;integer > 0&emsp;&emsp;(optional)                                     
 The ID of the product to update.
 
-```product_name```:&emsp;string              
+#### Request Body Parameters
+
+```product_name```:&emsp;string&emsp;&emsp;(optional)                           
 The name of the product.                     
 
-```price```:&emsp;decimal                         
+```price```:&emsp;decimal&emsp;&emsp;(optional)                           
 The price of the product.                               
 
-```stock```:&emsp;integer > 0                    
+```stock```:&emsp;integer > 0&emsp;&emsp;(optional)                            
 The amount of stock of the product.                  
 
-```category_id```:&emsp;integer > 0                      
+```category_id```:&emsp;integer > 0&emsp;&emsp;(optional)                                   
 The ID of the category this product belongs to.              
 
-```tagIds```:&emsp;array of integers                     
+```tagIds```:&emsp;array of integers&emsp;&emsp;(optional)                           
 An array of IDs for the tags associated with this product.      
 
 #### Sample Request Body
@@ -516,9 +521,9 @@ Sample Response:
 
 DELETE&emsp;```/products/{id}``` 
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0                         
+```id```&emsp;integer > 0&emsp;&emsp;(required)                                  
 The ID of the product to delete.
 
 #### Response
@@ -645,9 +650,9 @@ Sample Response:
 
 GET&emsp;```/tags/{id}```
 
-#### Parameters
+#### Request URL Parameters
 
-```id```&emsp;integer > 0
+```id```&emsp;integer > 0&emsp;&emsp;(required)                           
 The ID of the tag that you wish to get. Must be a positive integer.
 
 #### Response
@@ -694,12 +699,12 @@ A GET request made to https://fathomless-river-96310.herokuapp.com/api/tags/1 wo
 
 POST&emsp;```/tags```              
 
-#### Parameters           
+#### Request Body Parameters           
 
-```tag_name```:&emsp;string              
+```tag_name```:&emsp;string&emsp;&emsp;(required)                              
 The name of the tag.        
 
-```productIds```:&emsp;array of integers              
+```productIds```:&emsp;array of integers&emsp;&emsp;(required)                           
 An array containing the IDs of the products associated with this tag, or an empty array if there are none.                   
 
 #### Sample Request Body
@@ -737,15 +742,17 @@ A POST request made to https://fathomless-river-96310.herokuapp.com/api/tags wit
 
 PUT&emsp;```/tags/{id}```  
 
-#### Parameters
+#### Request URL Parameters
 
-```id```:&emsp;integer > 0                      
-The unique ID of the tag to update.                               
+```id```:&emsp;integer > 0&emsp;&emsp;(required)                                  
+The unique ID of the tag to update.       
 
-```tag_name```:&emsp;string              
+#### Request Body Parameters
+
+```tag_name```:&emsp;string&emsp;&emsp;(optional)                           
 The name of the tag.    
 
-```productIds```:&emsp;array of integers              
+```productIds```:&emsp;array of integers&emsp;&emsp;(required)                           
 An array containing the IDs of the products associated with this tag, or an empty array if there are none.        
 
 #### Sample Request Body
@@ -781,9 +788,9 @@ A PUT request made to https://fathomless-river-96310.herokuapp.com/api/tags/9 wi
 
 DELETE&emsp;```/tags/{id}```     
 
-#### Parameters             
+#### Request URL Parameters             
 
-```id```:&emsp;integer > 0                      
+```id```:&emsp;integer > 0&emsp;&emsp;(required)                                  
 The ID of the tag you wish to update                  
 
 #### Response
