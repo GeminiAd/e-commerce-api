@@ -92,7 +92,7 @@ router.put('/:id', (req, res) => {
     })
     .then((productTags) => {
       const productTagIds = productTags.map(({ product_id }) => product_id);
-      console.log(productTagIds);
+      //console.log(productTagIds);
 
       const productIdsToAdd = req.body.productIds.filter(productId => !productTagIds.includes(productId));
       const productTagsToRemove = productTags.filter(({ product_id }) => !req.body.productIds.includes(product_id));

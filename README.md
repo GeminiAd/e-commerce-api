@@ -2,9 +2,11 @@
 
 # e-Commerce API
 
-<a href="#description">Description</a> •
-<a href="#key-features">Key Features</a> •
-<a href="#usage">Usage</a> •
+<a href="#about-the-e-commerce-api">About the e-Commerce API</a> •
+<a href="#using-the-e-commerce-api">Using the e-Commerce API</a> •
+<a href="#category-api">Category API</a> •
+<a href="#product-api">Product API</a> •
+<a href="#tag-api">Tag API</a> •
 <a href="#technologies-used">Technologies Used</a> •
 <a href="#concepts-demonstrated">Concepts Demonstrated</a> •
 <a href="#author">Author</a>
@@ -17,11 +19,25 @@
 
 ## About the e-Commerce API
 
+The e-Commerce API is an API interface to a database relating Category, Product, and Tag info.                    
 
+A Category has many Products. A Product has one Category and many Tags associated with it. Tags have many products associated with it.              
+
+If a GET request is made to one of the appropriate routes, the API will return data about Categories, Products, and Tags in the form of JSON data. If a POST request is made to an appropriate route, the API can create a Category, Product, or Tag. If a PUT request is made to an appropriate route, the API can update a Category, Product, or Tag. If a DELETE request is made to an appropriate route, the API can delete a Category, Product, or Tag.
+
+## Using the e-Commerce API
+
+API Base URL: https://fathomless-river-96310.herokuapp.com/api                         
+
+The base URL for using this api is https://fathomless-river-96310.herokuapp.com/api. Each route has a different URL, all you have to do is make the appropriate request to the base URL concatenated with the API URL in the format specified. To make a GET request for all Categories, for example, you would make a GET request to https://fathomless-river-96310.herokuapp.com/api/categories as https://fathomless-river-96310.herokuapp.com/api is the base route and /categories is the route for that particular action. Each route for each action is listed below.
 
 ## Category API
 
-### Properties
+<a href="#get-all-categories">Get All Categories</a> •
+<a href="#get-category-by-id">Get Category By ID</a> •
+<a href="#create-a-category">Create a Category</a> •
+<a href="#update-a-category">Update a Category</a> •
+<a href="#delete-a-category">Delete a Category</a>
 
 Each category contains the properties:                      
 
@@ -37,7 +53,10 @@ The name of the category.
 
 GET&emsp;```/categories```
 
-#### Sample Response
+#### Response
+
+The API sends back a list of Categories and their associated Product information in the form of JSON data:                
+
 ```json
 [
 	{
@@ -66,32 +85,7 @@ GET&emsp;```/categories```
 			}
 		]
 	},
-	{
-		"id": 3,
-		"category_name": "Music",
-		"products": [
-			{
-				"id": 4,
-				"product_name": "Top 40 Music Compilation Vinyl Record",
-				"price": 13,
-				"stock": 50,
-				"category_id": 3
-			}
-		]
-	},
-	{
-		"id": 4,
-		"category_name": "Hats",
-		"products": [
-			{
-				"id": 3,
-				"product_name": "Branded Baseball Hat",
-				"price": 23,
-				"stock": 12,
-				"category_id": 4
-			}
-		]
-	},
+	...
 	{
 		"id": 5,
 		"category_name": "Shoes",
@@ -119,8 +113,12 @@ GET&emsp;```/categories/{id}```
 ```id```&emsp;integer > 0           
 The ID of the category that you wish to get. Must be a positive integer.
 
-#### Sample Response
-                        
+#### Response
+
+The API sends back the Category with the specified ID and its associated Product information.                    
+
+A GET request to https://fathomless-river-96310.herokuapp.com/api/categories/1 would give the following response:
+
 ```json
 {
 	"id": 1,
@@ -156,7 +154,10 @@ The name of the category you wish to update.
 }
 ```
 
-#### Sample Response
+#### Response
+
+The API creates the Category, and sends back the created Category in response.                   
+A POST request to https://fathomless-river-96310.herokuapp.com/api/categories would give the following response:             
 
 ```json
 {
@@ -179,7 +180,7 @@ The ID of the category that you wish to update. Must be a positive integer.
 ```category_name```&emsp;string               
 The name of the category you wish to update.
 
-#### Request Body
+#### Sample Request Body
 
 ```json
 {
@@ -187,7 +188,11 @@ The name of the category you wish to update.
 }
 ```
 
-#### Sample Response
+#### Response
+
+On a successful update, the API returns the number of rows updated as JSON.                
+
+The following JSON data is returned on a successful PUT request to https://fathomless-river-96310.herokuapp.com/api/categories/1 with the sample request body above:
 
 ```json
 [
@@ -206,13 +211,21 @@ DELETE&emsp;```/categories{id}```
 ```id```&emsp;integer > 0           
 The ID of the category that you wish to update. Must be a positive integer.  
 
-#### Sample Response
+#### Response
+
+Sends back the number of Categories deleted.
 
 ```json
 1
 ```
 
 ## Product API
+
+<a href="#get-all-products">Get All Products</a> •
+<a href="#get-product-by-id">Get Product By ID</a> •
+<a href="#create-a-product">Create a Product</a> •
+<a href="#update-a-product">Update a Product</a> •
+<a href="#delete-a-product">Delete a Product</a>
 
 Each product contains the properties:                     
 ```id```:&emsp;integer > 0                      
@@ -237,7 +250,10 @@ The ID of the category this product belongs to.
 GET&emsp;```/products```
 
 #### Response
-                      
+            
+The API sends back a list of all Products and their associated Category and Tag information.
+
+Sample response:
 ```json
 [
 	{
@@ -341,6 +357,10 @@ The ID of the product that you wish to get. Must be a positive integer.
 
 ### Response
 
+The API sends back the Product with the given ID and its associated Category and Tag information.
+
+A GET request made to https://fathomless-river-96310.herokuapp.com/api/products/1 would give the following response:
+
 ```json
 {
 	"id": 1,
@@ -421,6 +441,9 @@ An array of IDs for the tags associated with this product.
 
 #### Response
 
+The API sends back a list of tag-product relationships for the given Product on successful creation.
+
+Sample Response:
 ```json
 [
 	{
@@ -471,6 +494,9 @@ An array of IDs for the tags associated with this product.
 
 #### Response
 
+On a successful Product update, the API sends back the number of Product-Tag relationships removed and the Product-Tag relationships that were created.
+
+Sample Response:
 ```json
 [
 	1,
@@ -497,11 +523,19 @@ The ID of the product to delete.
 
 #### Response
 
+On a successful delete, the API sends back the number of Products deleted, which should be 1.
+
 ```json
 1
 ```
 
 ## Tag API
+
+<a href="#get-all-tags">Get All Tags</a> •
+<a href="#get-tag-by-id">Get Tag By ID</a> •
+<a href="#create-a-tag">Create a Tag</a> •
+<a href="#update-a-tag">Update a Tag</a> •
+<a href="#delete-a-tag">Delete a Tag</a>
 
 Each tag contains the properties:                     
 ```id```:&emsp;integer > 0                      
@@ -518,6 +552,9 @@ GET&emsp;```/tags```
 
 #### Response
 
+The API sends back a list of all Tags and their associated Products, in the form of JSON data.
+
+Sample Response:
 ```json
 [
 	{
@@ -615,6 +652,9 @@ The ID of the tag that you wish to get. Must be a positive integer.
 
 #### Response
 
+The API sends back the Tag with the given ID as JSON data in response.
+
+A GET request made to https://fathomless-river-96310.herokuapp.com/api/tags/1 would give the following response:
 ```json
 {
 	"id": 1,
@@ -673,6 +713,9 @@ An array containing the IDs of the products associated with this tag, or an empt
 
 #### Response
 
+On successful Tag creation, the API sends back a list of Product-Tag relationships created in response.
+
+A POST request made to https://fathomless-river-96310.herokuapp.com/api/tags with the above sample request body above would give the following response:
 ```json
 [
 	{
@@ -716,6 +759,9 @@ An array containing the IDs of the products associated with this tag, or an empt
 
 #### Response
 
+On a successful Tag update, the API sends back the number of Product-Tag relationships removed and the new Product-Tag relationships created.
+
+A PUT request made to https://fathomless-river-96310.herokuapp.com/api/tags/9 with the above sample request body above would give the following response:
 ```json
 [
 	1,
@@ -742,13 +788,11 @@ The ID of the tag you wish to update
 
 #### Response
 
+Returns the number of Tags deleted, which will always be 1 except on error.
+
 ```json
 1
 ```
-
-## Key Features
-
-
 
 ## Technologies Used
 
@@ -761,6 +805,8 @@ The ID of the tag you wish to update
 
 ## Concepts Demonstrated
 
+- Modelling data relationships using mysql2 and sequelize
+- Setting up a server using express.js
 - The use of node.js
 - Installing and using node.js packages using npm.
 - General JavaScript and programming knowledge.
