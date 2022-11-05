@@ -5,13 +5,14 @@ const { Category, Product } = require('../../models');
 
 router.get('/', (req, res) => {
   // find all categories
-  // be sure to include its associated Products
-
+  // include its associated Products
   Category.findAll({ include: [{ model: Product }] })
     .then((categories) => {
+      // if we're successful, send back the categories and a 200 response.
       res.status(200).json(categories);
     })
     .catch((error) => {
+      // If there's an error, send back the error
       console.log(error);
       res.status(500).json(error);
     });
@@ -19,11 +20,12 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
-  // be sure to include its associated Products
+  // include its associated Products
   Category.findByPk(req.params.id, {
     include: [{ model: Product }]
   })
     .then((category) => {
+      // if there is no category, send back a 404 not found error and a message, otherwise send back the category
       if (!category) {
         res.status(404).json({ message: 'No category found with that ID!' });
       } else {

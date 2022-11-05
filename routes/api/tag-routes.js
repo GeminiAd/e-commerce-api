@@ -5,7 +5,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', (req, res) => {
   // find all tags
-  // be sure to include its associated Product data
+  // include its associated Product data
   Tag.findAll({ include: [{ model: Product }] })
     .then((tags) => {
       res.status(200).json(tags);
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  // be sure to include its associated Product data
+  // its associated Product data
   Tag.findByPk(req.params.id, { include: [{ model: Product }] })
     .then((tag) => {
       if (!tag) {
@@ -57,6 +57,7 @@ router.post('/', (req, res) => {
         /* Then create many ProductTags using the information we just created. */
         return ProductTag.bulkCreate(productTagIdArr);
       } else {
+        // if there are no products associated with that tag, just return the tag
         res.status(200).json(tag);
       }
     })
@@ -84,6 +85,8 @@ router.put('/:id', (req, res) => {
     }
   })
     .then((tag) => {
+      // If the tag has been successfully updated, we need to find all ProductTags associated with the tag so we can remove or 
+      // add product-tag relationships if necessary
       if (!tag) {
         res.status(404).json({ message: "No tag found with that ID!" });
       } else {
@@ -91,12 +94,20 @@ router.put('/:id', (req, res) => {
       }
     })
     .then((productTags) => {
+      // These are all the product ids associated with the Tag.
       const productTagIds = productTags.map(({ product_id }) => product_id);
-      //console.log(productTagIds);
 
+      // We add any product IDS that are in the request body but not in the existing product-tag relationship table
       const productIdsToAdd = req.body.productIds.filter(productId => !productTagIds.includes(productId));
+
+      // We remove any product IDs that are in the product-tag relationship table but not in the request.
+      // Not that we are not parsing out the productIDs to remove, as the function destroy needs the ProductTag IDs
       const productTagsToRemove = productTags.filter(({ product_id }) => !req.body.productIds.includes(product_id));
+
+      // Parse out the ProductTag IDs from the ProductTags to remove
       const productTagIdsToRemove = productTagsToRemove.map((productTag) => productTag.id);
+
+      // Create ProductTags from the Product IDs to add that we made earlier
       const productTagsToAdd = productIdsToAdd.map((productId) => {
         return {
           product_id: productId,
@@ -104,7 +115,9 @@ router.put('/:id', (req, res) => {
         }
       });
       return Promise.all([
+        // Remove all the product tags by their id
         ProductTag.destroy({ where: { id: productTagIdsToRemove } }),
+        // create all the product-tags we have to
         ProductTag.bulkCreate(productTagsToAdd)
       ]);
     })
